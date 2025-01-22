@@ -23,6 +23,9 @@ include=secor.common.properties
 # TODO(pawel): use a list of nodes or even better, extract active brokers from zookeeper.
 kafka.seed.broker.host=<%= @kafka_hosts.sample %>.node
 
+# Set blacklist to null
+secor.kafka.topic_blacklist=
+
 # List of Kafka Zookeeper servers.
 zookeeper.quorum=<%= @zk_hosts %>
 
