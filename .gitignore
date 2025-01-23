@@ -7,3 +7,6 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+packaging/rpm/pkgs/*
+packaging/rpm/SOURCES/*
