@@ -1,3 +1,4 @@
+unified_mode true
 name             'secor'
 maintainer       'Eneo Tecnología S.L.'
 maintainer_email 'git@redborder.com'

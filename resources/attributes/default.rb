@@ -11,6 +11,3 @@ default['redborder']['secor']['kafka_hosts'] = ['kafka.service']
 default['redborder']['secor']['zk_hosts'] = ['zookeeper.service:2181']
 default['redborder']['secor']['s3_hostname'] = 's3.service'
 default['redborder']['secor']['s3_server'] = 's3.service'
-
-
-
