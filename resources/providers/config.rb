@@ -8,7 +8,6 @@ action :add do
 
     dnf_package 'rb-secor' do
       action :install
-      flush_cache [:before]
     end
 
     s3_hostname = new_resource.s3_hostname
