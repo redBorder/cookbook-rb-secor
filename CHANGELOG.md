@@ -1,6 +1,11 @@
 cookbook-rb-secor CHANGELOG
 ===============
 
+## 0.0.3
+
+  - jnavarrorb
+    - [3282568] Remove executable permissions on non-executable files
+
 ## 0.0.2
 
   - nilsver
