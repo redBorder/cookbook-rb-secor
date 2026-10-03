@@ -1,6 +1,11 @@
 cookbook-rb-secor CHANGELOG
 ===============
 
+## 0.0.4
+
+  - manegron
+    - [b058289] Upload cookbook only if opscode-erchef is active
+
 ## 0.0.3
 
   - jnavarrorb
