@@ -12,7 +12,6 @@ attribute :s3_server, kind_of: String, default: 's3.service'
 attribute :s3_hostname, kind_of: String, default: 's3.service'
 attribute :s3_user, kind_of: String, default: 'redborder'
 attribute :s3_pass, kind_of: String, default: 'redborder'
-attribute :openbao, kind_of: [TrueClass, FalseClass], default: false
 attribute :s3_port, kind_of: Integer, default: 9000
 attribute :s3_bucket, kind_of: String, default: 'bucket'
 attribute :manager_services, kind_of: Hash

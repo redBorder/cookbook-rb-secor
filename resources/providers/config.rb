@@ -5,7 +5,6 @@ include Secor::Helper
 
 action :add do
   begin
-    openbao = new_resource.openbao
 
     dnf_package 'rb-secor' do
       action :install
@@ -103,33 +102,20 @@ action :add do
       action :create
     end
 
-    if openbao
-      openbao_secret_file 'secor-common' do
-        source 'secor.common.properties.erb'
-        cookbook 'secor'
-        variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass, s3_bucket: s3_bucket)
-        destination '/run/rb-secrets/secor/secor.common.properties'
-        owner 'root'
-        group 'secor'
-        mode '0640'
-        unit 'rb-secor'
-      end
+    openbao_secret_file 'secor-common' do
+      source 'secor.common.properties.erb'
+      cookbook 'secor'
+      variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass, s3_bucket: s3_bucket)
+      destination '/run/rb-secrets/secor/secor.common.properties'
+      owner 'root'
+      group 'secor'
+      mode '0640'
+      unit 'rb-secor'
+    end
 
-      link '/var/secor/secor.common.properties' do
-        to '/run/rb-secrets/secor/secor.common.properties'
-        notifies :restart, 'service[rb-secor]', :delayed if manager_services['secor']
-      end
-    else
-      template '/var/secor/secor.common.properties' do
-        source 'secor.common.properties.erb'
-        cookbook 'secor'
-        owner 'secor'
-        group 'secor'
-        mode '644'
-        retries 2
-        variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass, s3_bucket: s3_bucket)
-        notifies :restart, 'service[rb-secor]', :delayed if manager_services['secor']
-      end
+    link '/var/secor/secor.common.properties' do
+      to '/run/rb-secrets/secor/secor.common.properties'
+      notifies :restart, 'service[rb-secor]', :delayed if manager_services['secor']
     end
 
     template '/etc/sysconfig/secor' do
@@ -197,33 +183,20 @@ action :add do
       notifies :restart, 'service[rb-secor-vault]', :delayed if manager_services['secor-vault']
     end
 
-    if openbao
-      openbao_secret_file 'secor-vault-common' do
-        source 'secor-vault.common.properties.erb'
-        cookbook 'secor'
-        variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass)
-        destination '/run/rb-secrets/secor/secor-vault.common.properties'
-        owner 'root'
-        group 'secor'
-        mode '0640'
-        unit 'rb-secor-vault'
-      end
+    openbao_secret_file 'secor-vault-common' do
+      source 'secor-vault.common.properties.erb'
+      cookbook 'secor'
+      variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass)
+      destination '/run/rb-secrets/secor/secor-vault.common.properties'
+      owner 'root'
+      group 'secor'
+      mode '0640'
+      unit 'rb-secor-vault'
+    end
 
-      link '/var/secor/secor-vault.common.properties' do
-        to '/run/rb-secrets/secor/secor-vault.common.properties'
-        notifies :restart, 'service[rb-secor-vault]', :delayed if manager_services['secor-vault']
-      end
-    else
-      template '/var/secor/secor-vault.common.properties' do
-        source 'secor-vault.common.properties.erb'
-        cookbook 'secor'
-        owner 'secor'
-        group 'secor'
-        mode '644'
-        retries 2
-        variables(s3_hostname: s3_hostname, s3_user: s3_user, s3_pass: s3_pass)
-        notifies :restart, 'service[rb-secor-vault]', :delayed if manager_services['secor-vault']
-      end
+    link '/var/secor/secor-vault.common.properties' do
+      to '/run/rb-secrets/secor/secor-vault.common.properties'
+      notifies :restart, 'service[rb-secor-vault]', :delayed if manager_services['secor-vault']
     end
 
     template '/var/secor/log4j-vault.prod.properties' do
